@@ -1,10 +1,15 @@
 import { Link } from 'react-router-dom'
+import logo from '../assets/logo_site.png';
+import settingsIcon from '../assets/settingsIcon-Photoroom.png';
+import './Header.css'
 
 export default function Header() {
     return (
-        <nav style={{ background: '#333', padding: '15px', display: 'flex', gap: '15px' }}>
-            <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>Home</Link>
-            <Link to="/settings" style={{ color: 'white', textDecoration: 'none' }}>Settings</Link>
-        </nav>
+        <header className="header-container">
+            <nav className="header-nav">
+                <Link to="/" title={'Home'}><img src={logo} alt=""/>UniMatch</Link>
+                <Link to="/settings" title={'Settings'}><img src={settingsIcon} alt=""/></Link>
+            </nav>
+        </header>
     )
 }

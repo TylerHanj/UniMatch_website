@@ -1,13 +1,21 @@
 import { Link } from 'react-router-dom'
+import roadmap from '../assets/roadmap_icon-Photoroom.png';
+import home from '../assets/home_icon-Photoroom.png';
+import profile from '../assets/profile_icon.png';
+import comparison from '../assets/comparison.png';
+import catalog from '../assets/catalog.png';
+import './Footer.css'
 
 export default function Footer() {
     return (
-        <nav style={{ background: '#333', padding: '15px', display: 'flex', gap: '15px' }}>
-            <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>Home</Link>
-            <Link to="/profile" style={{ color: 'white', textDecoration: 'none' }}>Profile</Link>
-            <Link to="/roadmap" style={{ color: 'white', textDecoration: 'none' }}>Roadmap</Link>
-            <Link to="/comparison" style={{ color: 'white', textDecoration: 'none' }}>Comparison</Link>
-            <Link to="/catalog" style={{ color: 'white', textDecoration: 'none' }}>Catalog</Link>
-        </nav>
+        <footer className="footer-container">
+            <nav className="footer-nav">
+                <Link to="/" title={'Home'}><img src={home} alt="home   "/></Link>
+                <Link to="/profile" title={'Profile'}><img src={profile} alt=""/></Link>
+                <Link to="/roadmap" title={'Roadmap'}><img src={roadmap} alt=""/></Link>
+                <Link to="/comparison" title={'Comparison'}><img src={comparison} alt=""/></Link>
+                <Link to="/catalog" title={'Catalog'}><img src={catalog} alt=""/></Link>
+            </nav>
+        </footer>
     )
 }

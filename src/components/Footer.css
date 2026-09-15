@@ -1,0 +1,72 @@
+.footer-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    /* Глубокий тёмно-коричневый / почти чёрный фон */
+    background-color: #1a1614;
+    border-top: 1px solid #3d3229;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    padding: 12px 0;
+}
+
+.footer-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+/* Кнопка в стиле винтажного переплёта */
+/* Светлые кнопки в стиле старого пергамента */
+.footer-nav a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 50px;
+    height: 50px;
+
+    background-color: #e6d7c3; /* Светло-пергаментный фон */
+    border: 1.5px solid #8c6d46;
+    border-radius: 8px;
+
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+/* Наведение */
+.footer-nav a:hover {
+    border-color: #c9a86b;
+    background-color: #f3ebde; /* Подсветка при наведении */
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(201, 168, 107, 0.3);
+}
+
+/* Нажатие */
+.footer-nav a:active {
+    transform: translateY(-1px) scale(0.96);
+    background-color: #221b17;
+}
+
+/* Настройки иконок */
+.footer-nav img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    display: block;
+
+    /* Делает чёрные/цветные иконки более тёплыми и гармоничными с фоном */
+    filter: sepia(0.3) contrast(0.9) brightness(0.9);
+    transition: filter 0.3s ease;
+}
+
+/* При наведении иконки становятся чуть ярче */
+.footer-nav a:hover img {
+    filter: sepia(0.1) brightness(1.1);
+}

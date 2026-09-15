@@ -1,0 +1,109 @@
+.header-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    /* Глубокий тёмно-кофейный фон */
+    background-color: #1a1614;
+    border-bottom: 1px solid #3d3229;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    padding: 10px 0;
+}
+
+.header-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* Общие стили для ссылок в шапке */
+.header-nav a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    text-decoration: none;
+    color: #c9a86b; /* Состаренное золото */
+    font-family: 'Georgia', 'Garamond', serif; /* Классический академический шрифт */
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+
+    transition: all 0.3s ease;
+}
+
+/* Ссылка с логотипом и названием */
+.header-nav a:first-child {
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.header-nav a:first-child:hover {
+    color: #e6cb96;
+    text-shadow: 0 0 8px rgba(201, 168, 107, 0.4);
+}
+
+/* Обновлённый светлый фон для кнопки настроек */
+.header-nav a:last-child {
+    width: 42px;
+    height: 42px;
+    justify-content: center;
+
+    background-color: #e6d7c3; /* Светло-пергаментный фон */
+    border: 1.5px solid #8c6d46;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+/* Наведение для кнопки настроек */
+.header-nav a:last-child:hover {
+    border-color: #c9a86b;
+    background-color: #f3ebde; /* Ещё чуть светлее при наведении */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(201, 168, 107, 0.3);
+}
+
+.header-nav a:last-child:active {
+    transform: scale(0.95);
+}
+
+/* Строгие размеры и тонирование для картинок в шапке */
+.header-nav img {
+    object-fit: contain;
+    display: block;
+    filter: sepia(0.3) contrast(0.9) brightness(0.9);
+    transition: filter 0.3s ease;
+}
+
+/* Логотип */
+.header-nav a:first-child img {
+    width: 32px;
+    height: 32px;
+}
+
+/* Иконка настроек */
+.header-nav a:last-child img {
+    width: 22px;
+    height: 22px;
+}
+
+/* Эффект при наведении на картинки */
+.header-nav a:hover img {
+    filter: sepia(0.1) brightness(1.1);
+}
+
+/* Вращение иконки настроек при наведении */
+.header-nav a:last-child:hover img {
+    transform: rotate(90deg);
+}
+
+.header-nav img {
+    /* ...ваши остальные свойства... */
+    transition: filter 0.3s ease, transform 0.4s ease; /* Добавлен transform */
+}
