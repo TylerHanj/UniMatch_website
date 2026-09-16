@@ -1,72 +1,63 @@
+/* Footer.css */
+
+/* Фиксированная нижняя панель навигации */
 .footer-container {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-
-    /* Глубокий тёмно-коричневый / почти чёрный фон */
-    background-color: #1a1614;
-    border-top: 1px solid #3d3229;
-    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.5);
+    height: 64px;
+    background-color: rgba(18, 14, 12, 0.92); /* Тёмно-ореховый фон с легкой прозрачностью */
+    backdrop-filter: blur(8px);
+    border-top: 1px solid #2a2018;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
     z-index: 1000;
-    padding: 12px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+/* Контейнер для ссылок */
 .footer-nav {
     display: flex;
-    justify-content: space-around;
     align-items: center;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 0 10px;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 500px;
+    padding: 0 16px;
 }
 
-/* Кнопка в стиле винтажного переплёта */
-/* Светлые кнопки в стиле старого пергамента */
+/* Иконки / Ссылки */
 .footer-nav a {
     display: flex;
     align-items: center;
     justify-content: center;
-
-    width: 50px;
-    height: 50px;
-
-    background-color: #e6d7c3; /* Светло-пергаментный фон */
-    border: 1.5px solid #8c6d46;
+    width: 44px;
+    height: 44px;
     border-radius: 8px;
-
-    box-sizing: border-box;
-    transition: all 0.3s ease;
+    background-color: #181310;
+    border: 1px solid #2a2018;
+    transition: all 0.25s ease;
     text-decoration: none;
 }
 
-/* Наведение */
+/* Эффекты при наведении и фокусе */
 .footer-nav a:hover {
-    border-color: #c9a86b;
-    background-color: #f3ebde; /* Подсветка при наведении */
+    background-color: #241c17;
+    border-color: #c9a86b; /* Золотисто-латунный акцент */
     transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(201, 168, 107, 0.3);
+    box-shadow: 0 4px 12px rgba(201, 168, 107, 0.15);
 }
 
-/* Нажатие */
-.footer-nav a:active {
-    transform: translateY(-1px) scale(0.96);
-    background-color: #221b17;
-}
-
-/* Настройки иконок */
+/* Иконки внутри кнопок */
 .footer-nav img {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     object-fit: contain;
-    display: block;
-
-    /* Делает чёрные/цветные иконки более тёплыми и гармоничными с фоном */
-    filter: sepia(0.3) contrast(0.9) brightness(0.9);
-    transition: filter 0.3s ease;
+    filter: invert(0.75) sepia(0.2) hue-rotate(5deg); /* Тёплый оттенок */
+    transition: filter 0.25s ease;
 }
 
-/* При наведении иконки становятся чуть ярче */
 .footer-nav a:hover img {
-    filter: sepia(0.1) brightness(1.1);
+    filter: invert(0.95) sepia(0.4) saturate(2) hue-rotate(5deg); /* Подсветка золотом */
 }

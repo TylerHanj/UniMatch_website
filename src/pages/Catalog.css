@@ -1,0 +1,167 @@
+/* Catalog.css */
+
+/* Основной контейнер каталога */
+.catalog-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 0 20px;
+    color: #e0d8c3;
+    font-family: 'Georgia', serif; /* Готический/академический дух */
+}
+
+/* Блок фильтров и поиска */
+.controls {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    background-color: #181310;
+    border: 1px solid #2a2018;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 28px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.controls input[type="text"] {
+    flex: 1;
+    min-width: 220px;
+    background-color: #120e0c;
+    border: 1px solid #36291e;
+    border-radius: 6px;
+    padding: 10px 14px;
+    color: #f0e6d2;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.controls input[type="text"]:focus {
+    border-color: #c9a86b; /* Золотистый акцент */
+}
+
+.controls label {
+    color: #a89f91;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.controls select {
+    background-color: #120e0c;
+    border: 1px solid #36291e;
+    border-radius: 6px;
+    padding: 10px 14px;
+    color: #f0e6d2;
+    font-size: 0.95rem;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+.controls select:focus {
+    border-color: #c9a86b;
+}
+
+/* Статус загрузки */
+.catalog-container > span {
+    display: block;
+    text-align: center;
+    margin: 20px 0;
+    font-style: italic;
+    color: #c9a86b;
+    font-size: 1.1rem;
+}
+
+/* Сетка карточек университетов */
+.universities-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Карточка университета */
+.uni-card {
+    background-color: #181310;
+    border: 1px solid #2a2018;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.uni-card:hover {
+    transform: translateY(-4px);
+    border-color: #c9a86b;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.uni-card h3 {
+    margin: 0 0 12px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #f0e6d2;
+    line-height: 1.4;
+}
+
+.uni-card .country-tag {
+    margin: 0 0 16px 0;
+    font-size: 0.85rem;
+    color: #a89f91;
+}
+
+.uni-card a {
+    align-self: flex-start;
+    color: #c9a86b;
+    text-decoration: none;
+    font-size: 0.85rem;
+    border-bottom: 1px dashed #c9a86b;
+    padding-bottom: 2px;
+    transition: opacity 0.2s ease;
+}
+
+.uni-card a:hover {
+    opacity: 0.8;
+}
+
+/* Пагинация */
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 36px;
+    padding-bottom: 20px;
+}
+
+.pagination button {
+    background-color: #181310;
+    border: 1px solid #2a2018;
+    color: #c9a86b;
+    padding: 8px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+    background-color: #241c17;
+    border-color: #c9a86b;
+}
+
+.pagination button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.pagination span {
+    color: #a89f91;
+    font-size: 0.9rem;
+}

@@ -1,0 +1,27 @@
+/* Layout.css */
+
+.layout-wrapper {
+    /* Задаем минимальную высоту в 100vh, но разрешаем расти дальше */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.main-content {
+    /* Разрешаем флексу расти и сжиматься естественным образом */
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 20px 40px; /* Добавили нижний отступ 40px */
+}
+
+/* Layout.css */
+
+.main-content {
+    /* ... твои остальные стили ... */
+
+    /* Высота футера 64px + 32px запаса для кнопок пагинации */
+    padding-bottom: 96px !important;
+}
