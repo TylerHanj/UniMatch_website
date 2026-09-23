@@ -3,13 +3,13 @@ import Header from './Header'
 import Footer from './Footer'
 import './Layout.css'
 
-export default function Layout() {
+export default function Layout({userProfile, setUserProfile}) {
     return (
         <div className="layout-wrapper">
             <Header />
 
-            <main className="main-content"z>
-                <Outlet />
+            <main className="main-content">
+                <Outlet context={{ userProfile, setUserProfile }} />
             </main>
 
             <Footer />

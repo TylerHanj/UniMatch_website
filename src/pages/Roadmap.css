@@ -1,0 +1,146 @@
+.roadmap-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 24px;
+    color: #e2e8f0;
+}
+
+.roadmap-header {
+    margin-bottom: 36px;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 16px;
+}
+
+.roadmap-header h1 {
+    font-family: 'Georgia', 'Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #f1f5f9;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+}
+
+.roadmap-header p {
+    color: #94a3b8;
+    font-size: 0.95rem;
+}
+
+.roadmap-header strong {
+    color: #d4af37; /* Warm Gold */
+}
+
+.timeline-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.timeline-phase {
+    background: #111827; /* Deep Navy Charcoal */
+    border: 1px solid #2d3748;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.phase-badge {
+    display: inline-block;
+    background: rgba(212, 175, 55, 0.1);
+    color: #d4af37;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    font-family: 'Georgia', serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 4px 12px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+}
+
+.phase-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1f2937;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+}
+
+.phase-header h2 {
+    font-family: 'Georgia', serif;
+    font-size: 1.3rem;
+    color: #f8fafc;
+    margin: 0;
+}
+
+.timeframe {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    font-style: italic;
+}
+
+.task-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.task-card {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-left: 3px solid #64748b;
+    border-radius: 6px;
+    padding: 16px;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.task-card:hover {
+    transform: translateY(-2px);
+    border-color: #475569;
+}
+
+.task-card.priority-high {
+    border-left-color: #991b1b; /* Muted Burgundy/Crimson */
+}
+
+.task-card.priority-medium {
+    border-left-color: #d4af37; /* Muted Gold */
+}
+
+.task-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.task-top h4 {
+    font-family: 'Georgia', serif;
+    margin: 0;
+    font-size: 1rem;
+    color: #f1f5f9;
+}
+
+.priority-tag {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #94a3b8;
+}
+
+.task-card p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #cbd5e1;
+    line-height: 1.4;
+}
+
+.status-text {
+    color: #d4af37;
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    padding: 20px 0;
+}

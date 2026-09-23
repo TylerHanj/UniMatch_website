@@ -1,0 +1,210 @@
+.home-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px 16px;
+    font-family: 'Georgia', serif;
+    color: #f0e6d2;
+}
+
+/* Верхняя панель управления */
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #181310;
+    padding: 16px;
+    border: 1px solid #2a2018;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.controls input, .controls select {
+    background-color: #120e0c;
+    border: 1px solid #36291e;
+    color: #f0e6d2;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.controls input {
+    flex: 1;
+}
+
+.controls input:focus, .controls select:focus {
+    border-color: #c9a86b;
+}
+
+.ai-match-btn {
+    background-color: #2e2218;
+    border: 1px solid #c9a86b;
+    color: #c9a86b;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.ai-match-btn:hover:not(:disabled) {
+    background-color: #c9a86b;
+    color: #120e0c;
+}
+
+.ai-match-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Двухколоночный макет */
+.main-layout {
+    display: grid;
+    grid-template-columns: 1fr 360px; /* Фид слева, Чат 360px справа */
+    gap: 24px;
+    align-items: start;
+}
+
+/* Адаптируем под мобилки */
+@media (max-width: 900px) {
+    .main-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Левая колонка: Фид университетов */
+.universities-feed {
+    background-color: #181310;
+    border: 1px solid #2a2018;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.feed-header h2 {
+    margin: 0 0 16px 0;
+    font-size: 1.2rem;
+    color: #f0e6d2;
+    border-bottom: 1px solid #2a2018;
+    padding-bottom: 10px;
+}
+
+.status-text {
+    padding: 12px;
+    color: #c9a86b;
+    font-style: italic;
+}
+
+.uni-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.uni-card {
+    background-color: #120e0c;
+    border: 1px solid #2a2018;
+    border-radius: 8px;
+    padding: 16px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.uni-card:hover {
+    border-color: #423224;
+    transform: translateY(-2px);
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.card-top h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #f0e6d2;
+}
+
+.match-badge {
+    background-color: #2e2218;
+    color: #c9a86b;
+    border: 1px solid #c9a86b;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+.country-tag {
+    margin: 6px 0;
+    color: #a89a88;
+    font-size: 0.85rem;
+}
+
+.ai-reason {
+    background-color: #181310;
+    border-left: 3px solid #c9a86b;
+    padding: 8px 12px;
+    margin: 10px 0;
+    font-size: 0.85rem;
+    color: #d0c4b0;
+    border-radius: 0 4px 4px 0;
+}
+
+.uni-link {
+    display: inline-block;
+    margin-top: 6px;
+    color: #c9a86b;
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.uni-link:hover {
+    text-decoration: underline;
+}
+
+/* Правая колонка: Чат */
+.sidebar-chat {
+    position: sticky;
+    top: 24px;
+}
+
+/* Баннер портфолио */
+.portfolio-banner {
+    background-color: #181310;
+    border: 1px solid #2a2018;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.portfolio-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #c9a86b;
+    border-bottom: 1px solid #2a2018;
+    padding-bottom: 10px;
+}
+
+.portfolio-tags {
+    font-size: 0.8rem;
+    color: #8a7a68;
+}
+
+.feed-subtitle {
+    display: block;
+    font-size: 0.8rem;
+    color: #8a7a68;
+    margin-top: 4px;
+}
