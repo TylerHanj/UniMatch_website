@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { ai } from "../utils/ai.js";
+import { generate } from "../utils/ai.js";
 import "./AiChat.css";
 
 export default function AiChat({ userProfile }) {
@@ -28,41 +28,37 @@ export default function AiChat({ userProfile }) {
         setLoading(true);
 
         try {
+            const history = [...messages, { role: "user", text: userMessage }]
+                .slice(-7)
+                .map((m) => `${m.role === "user" ? "Student" : "Advisor"}: ${m.text}`)
+                .join("\n");
+
             const promptText = `
             You are UniMatch AI, a virtual university admissions consultant.
             Communication Style: Polite, intellectual (Dark Academia).
-            
+            Answer in the language the student writes in. Be concise.
+
             Student Profile:
             - Major: ${userProfile?.major || "Not specified"}
             - Countries: ${userProfile?.countries || "Any"}
-            
-            User Question: ${userMessage}
-                        `;
 
-            // Вызов Gemini API
-            const response = await ai.models.generateContent({
-                model: 'gemini-3.6-flash',
-                contents: promptText,
-            });
+            Conversation so far:
+            ${history}
 
-            // Извлекаем текст из ответа
-            const replyText = response.text || "Не удалось получить ответ.";
+            Reply as the Advisor to the last Student message.
+            `;
+
+            const replyText = await generate(promptText);
 
             setMessages((prev) => [
                 ...prev,
-                { role: "model", text: replyText }
+                { role: "model", text: replyText || "Не удалось получить ответ." }
             ]);
         } catch (error) {
-            console.error("Детали ошибки Gemini AI:", error);
-
-            // Если ключ забыли или он не прочитался
-            const errorMessage = error?.message?.includes("API key")
-                ? "Ошибка: API-ключ не найден или недействителен. Перезапустите `npm run dev`."
-                : `Ошибка: ${error?.message || "Не удалось связаться с AI"}`;
-
+            console.error("Детали ошибки AI:", error);
             setMessages((prev) => [
                 ...prev,
-                { role: "model", text: errorMessage }
+                { role: "model", text: error?.message || "Не удалось связаться с AI." }
             ]);
         } finally {
             setLoading(false);

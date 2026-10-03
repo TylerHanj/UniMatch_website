@@ -86,14 +86,14 @@ export default function Catalog() {
             {totalPages > 1 && (
                 <div className="pagination">
                     <button
-                        disabled={page === 1 && loading}
+                        disabled={page === 1 || loading}
                         onClick={() => setPage((p) => p - 1)}
                     >
                         Back
                     </button>
                     <span>{page} of {totalPages}</span>
                     <button
-                        disabled={page === totalPages && loading}
+                        disabled={page === totalPages || loading}
                         onClick={() => setPage((p) => p + 1)}
                     >
                         Next

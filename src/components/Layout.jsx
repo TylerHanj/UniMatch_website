@@ -1,9 +1,12 @@
 import { Outlet } from 'react-router-dom'
+import { useProfile } from '../context/ProfileContext'
 import Header from './Header'
 import Footer from './Footer'
 import './Layout.css'
 
-export default function Layout({userProfile, setUserProfile}) {
+export default function Layout() {
+    const { userProfile, setUserProfile } = useProfile()
+
     return (
         <div className="layout-wrapper">
             <Header />

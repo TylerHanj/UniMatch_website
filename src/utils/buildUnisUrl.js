@@ -1,16 +1,16 @@
-export function buildUnisUrl({
-                                 search = "",
-                                 country = "",
-                             }) {
+export function buildUnisUrl({ search = "", country = "" }) {
     const endpoint = "http://universities.hipolabs.com/search";
     const url = new URL(endpoint);
 
-    if (search.trim()) {
-        url.searchParams.set("name", search.trim());
+    const name = search.trim();
+    const countryName = country.trim();
+
+    if (name) {
+        url.searchParams.set("name", name);
     }
 
-    if (country.trim() != 'all') {
-        url.searchParams.set("country", country.trim());
+    if (countryName && countryName.toLowerCase() !== "all") {
+        url.searchParams.set("country", countryName);
     }
 
     return url.toString();

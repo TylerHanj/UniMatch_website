@@ -1,29 +1,19 @@
 import { useState, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
-import { ai } from "../utils/ai.js";
+import { generate, makeCacheKey } from "../utils/ai.js";
 import "./Roadmap.css";
 
 export default function Roadmap() {
     const { userProfile } = useOutletContext();
     const [roadmap, setRoadmap] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [notice, setNotice] = useState("");
 
     useEffect(() => {
+        let cancelled = false;
         const generateRoadmap = async () => {
             setLoading(true);
-            const cacheKey = `roadmap_cache_${userProfile?.major}_${userProfile?.gpa}_${userProfile?.countries}`;
-            const cached = localStorage.getItem(cacheKey);
-
-            if (cached) {
-                try {
-                    setRoadmap(JSON.parse(cached));
-                    setLoading(false);
-                    return;
-                } catch (e) {
-                    localStorage.removeItem(cacheKey);
-                }
-            }
-
+            setNotice("");
             const prompt = `
 Ты — главный консультант по поступлению в заграничные ВУЗы.
 Составь персональный пошаговый план (Roadmap) подготовки и подачи документов для абитуриента.
@@ -52,7 +42,7 @@ export default function Roadmap() {
       "phaseTitle": "Фаза 2: Сбор документов и Эссе",
       "timeframe": "За 8–5 месяцев до подачи",
       "tasks": [
-        { "title": "Написание Personal Statement", "description": "Сфокусироваться на проектах в сфере " + "${userProfile?.major || 'выбранного профиля'}", "priority": "High" },
+        { "title": "Написание Personal Statement", "description": "Сфокусироваться на проектах в сфере ${userProfile?.major || 'выбранного профиля'}", "priority": "High" },
         { "title": "Рекомендательные письма", "description": "Запросить 2-3 письма у преподавателей", "priority": "High" }
       ]
     },
@@ -75,24 +65,23 @@ export default function Roadmap() {
 `;
 
             try {
-                const response = await ai.models.generateContent({
-                    model: 'gemini-2.5-flash',
-                    contents: prompt,
-                    config: { responseMimeType: 'application/json' }
-                });
-
-                const parsed = JSON.parse(response.text);
-                setRoadmap(parsed);
-                localStorage.setItem(cacheKey, JSON.stringify(parsed));
+                const { major, countries, gpa, testScores, budget, notes } = userProfile || {};
+                const cacheKey = makeCacheKey("roadmap", { major, countries, gpa, testScores, budget, notes });
+                const parsed = await generate(prompt, { json: true, cacheKey });
+                if (!cancelled) setRoadmap(parsed);
             } catch (err) {
                 console.warn("⚠️ Ошибка генерации Roadmap. Используем дефолтный план.", err);
-                setRoadmap(getFallbackRoadmap(userProfile));
+                if (!cancelled) {
+                    setRoadmap(getFallbackRoadmap(userProfile));
+                    setNotice(err.message || "ИИ недоступен.");
+                }
             } finally {
-                setLoading(false);
+                if (!cancelled) setLoading(false);
             }
         };
 
         generateRoadmap();
+        return () => { cancelled = true; };
     }, [userProfile]);
 
     return (
@@ -101,6 +90,8 @@ export default function Roadmap() {
                 <h1>🗺️ Personal Admission Roadmap</h1>
                 <p>Индивидуальный график поступления на специальность <strong>{userProfile?.major || "Selected Major"}</strong></p>
             </header>
+
+            {notice && <div className="status-text">⚠️ {notice} Показан стандартный план.</div>}
 
             {loading ? (
                 <div className="status-text">✨ ИИ составляет твой персональный график подготовки...</div>

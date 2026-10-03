@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useOutletContext } from "react-router-dom";
-import { ai } from "../utils/ai.js";
+import { generate, makeCacheKey } from "../utils/ai.js";
 import "./Comparison.css";
 
 export default function Comparison() {
@@ -9,65 +9,51 @@ export default function Comparison() {
     const [uni2, setUni2] = useState("Stanford University");
     const [comparisonData, setComparisonData] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
 
     const handleCompare = async (e) => {
         e.preventDefault();
         if (!uni1 || !uni2 || uni1 === uni2) return;
 
         setLoading(true);
+        setErrorMsg("");
+
+        const major = userProfile?.major || "Computer Science";
+        const gpa = userProfile?.gpa || "3.8";
+        const budget = userProfile?.budget || "Medium / Need Financial Aid";
 
         const prompt = `
-Сравни два университета для абитуриента с профилем:
-- Major: ${userProfile?.major || "Computer Science"}
-- GPA: ${userProfile?.gpa || "3.8"}
-- Budget: ${userProfile?.budget || "Medium / Need Financial Aid"}
-
-ВУЗ 1: ${uni1}
-ВУЗ 2: ${uni2}
-
-Проведи объективное сравнение по 5 критериям и дай финальный вердикт.
-
-ВЫВЕДИ ТОЛЬКО СТРОГИЙ JSON:
-{
-  "uni1Name": "${uni1}",
-  "uni2Name": "${uni2}",
-  "criteria": [
-    {
-      "name": "Академическая репутация и Расположение",
-      "uni1Val": "Кембридж, Массачусетс. Исторический лидер, идеален для академической карьеры.",
-      "uni2Val": "Кремниевая долина, Калифорния. Прямой доступ к IT-гигантам и стартапам."
-    },
-    {
-      "name": "Требования к поступлению",
-      "uni1Val": "Экстремально высокий конкурс (<4%). Требуются высшие баллы и глубокие исследования.",
-      "uni2Val": "Конкурс <4%. Упор на лидерство, инновации и уникальный практический опыт."
-    },
-    {
-      "name": "Финансовая помощь / Стипендии",
-      "uni1Val": "Need-blind для всех учащихся, полное покрытие при доходе семьи <$85k.",
-      "uni2Val": "Щедрая финансовая помощь, Need-blind для граждан и некоторых категорий."
-    },
-    {
-      "name": "Перспективы в " + "${userProfile?.major || 'выбранной сфере'}",
-      "uni1Val": "Отличные связи в науке и фундаментальных исследованиях.",
-      "uni2Val": "Ллучшая экосистема для венчура и работы в BigTech."
-    }
-  ],
-  "verdict": "Подводя итог: если ваша цель — классические исследования и научная карьера, выбирайте ${uni1}. Если хотите запускать стартапы или работать в IT-секторе — предпочтительнее ${uni2}."
-}
-`;
+        Сравни два университета для абитуриента:
+        - Специальность: ${major}
+        - GPA: ${gpa}
+        - Бюджет/Финансы: ${budget}
+        
+        Первый ВУЗ: ${uni1}
+        Второй ВУЗ: ${uni2}
+        
+        Проведи детальное сравнение по 5 критериям (Репутация/Локация, Требования, Финансовая помощь, Перспективы в ${major}, Инфраструктура) и дай финальный вердикт.
+        
+        Верни строго JSON со следующей структурой:
+        {
+          "uni1Name": "${uni1}",
+          "uni2Name": "${uni2}",
+          "criteria": [
+            {
+              "name": "Название критерия",
+              "uni1Val": "Анализ для ${uni1}",
+              "uni2Val": "Анализ для ${uni2}"
+            }
+          ],
+          "verdict": "Итоговый совет абитуриенту..."
+        }`;
 
         try {
-            const response = await ai.models.generateContent({
-                model: 'gemini-2.5-flash',
-                contents: prompt,
-                config: { responseMimeType: 'application/json' }
-            });
-
-            const parsed = JSON.parse(response.text);
+            const cacheKey = makeCacheKey("compare", uni1.trim(), uni2.trim(), major, gpa, budget);
+            const parsed = await generate(prompt, { json: true, cacheKey });
             setComparisonData(parsed);
         } catch (err) {
             console.error("Ошибка при сравнении ВУЗов:", err);
+            setErrorMsg(err.message || "Не удалось получить данные от ИИ. Попробуйте позже.");
         } finally {
             setLoading(false);
         }
@@ -111,6 +97,7 @@ export default function Comparison() {
             </form>
 
             {loading && <div className="status-text">✨ ИИ сравнивает академические программы и шансы...</div>}
+            {errorMsg && <div className="error-text" style={{ color: "#ff4d4d", marginTop: "1rem" }}>{errorMsg}</div>}
 
             {comparisonData && !loading && (
                 <div className="comparison-result">

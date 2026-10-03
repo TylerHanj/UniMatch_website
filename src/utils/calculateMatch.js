@@ -1,4 +1,4 @@
-import { ai } from "./ai.js";
+import { generate, makeCacheKey, AiError } from "./ai.js";
 
 export async function calculateMatch(userProfile, universities) {
     if (!universities || universities.length === 0) return [];
@@ -51,21 +51,12 @@ ${JSON.stringify(formattedUnis, null, 2)}
 ]
 `;
 
-    try {
-        const response = await ai.models.generateContent({
-            model: 'gemini-3.6-flash',
-            contents: prompt,
-            config: {
-                responseMimeType: 'application/json',
-            }
-        });
+    const { major, countries, gpa, testScores, budget, notes } = userProfile || {};
+    const cacheKey = makeCacheKey("match", { major, countries, gpa, testScores, budget, notes }, formattedUnis.map((u) => u.name));
 
-        const parsed = JSON.parse(response.text);
-        console.log("🎯 Realistic AI Match Evaluation:", parsed);
-        return parsed;
-
-    } catch (error) {
-        console.error("❌ Ошибка при расчете беспристрастного Match Rate:", error);
-        return [];
+    const parsed = await generate(prompt, { json: true, cacheKey });
+    if (!Array.isArray(parsed)) {
+        throw new AiError("UNKNOWN", "ИИ вернул ответ в неожиданном формате.");
     }
+    return parsed;
 }
