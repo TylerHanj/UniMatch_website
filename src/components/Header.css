@@ -44,36 +44,6 @@
     text-shadow: 0 0 8px rgba(201, 168, 107, 0.3);
 }
 
-/* Кнопка настроек */
-.header-nav a:last-child {
-    width: 42px;
-    height: 42px;
-    justify-content: center;
-    background-color: #181310;
-    border: 1px solid #2a2018;
-    border-radius: 6px;
-    box-sizing: border-box;
-}
-
-/* Наведение для кнопки настроек */
-.header-nav a:last-child:hover {
-    border-color: #c9a86b;
-    background-color: #221a15;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-}
-
-.header-nav a:last-child:active {
-    transform: scale(0.95);
-}
-
-/* Картинки и иконки */
-.header-nav img {
-    object-fit: contain;
-    display: block;
-    transition: filter 0.3s ease, transform 0.4s ease;
-}
-
 /* Логотип */
 .header-nav a:first-child img {
     height: 36px;
@@ -83,16 +53,4 @@
 
 .header-nav a:first-child:hover img {
     transform: scale(1.03);
-}
-
-/* Иконка настроек */
-.header-nav a:last-child img {
-    width: 20px;
-    height: 20px;
-    filter: invert(0.8) sepia(0.2);
-}
-
-.header-nav a:last-child:hover img {
-    filter: invert(1) sepia(0.5);
-    transform: rotate(90deg);
 }

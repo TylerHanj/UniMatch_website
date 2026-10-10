@@ -51,7 +51,7 @@ export default function Profile() {
                                 name="fullName"
                                 value={formData.fullName || ""}
                                 onChange={handleChange}
-                                placeholder="e.g. Dias Taubaev"
+                                placeholder=""
                             />
                         </div>
 
