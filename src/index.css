@@ -109,3 +109,47 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+/* Адаптивность для мобильных телефонов */
+@media screen and (max-width: 768px) {
+  /* Защита от горизонтального скролла */
+  body, html {
+    overflow-x: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Безопасные отступы для контента */
+  .container,
+  main {
+    width: 100% !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    box-sizing: border-box;
+  }
+
+  /* Фикс для логотипа (чтобы сова не становилась огромной) */
+  img[src*="logo"],
+  .logo img,
+  header img {
+    max-width: 40px !important;
+    height: auto !important;
+  }
+
+  /* Удобные кнопки и поля ввода для пальцев */
+  button,
+  input,
+  select {
+    min-height: 44px;
+    font-size: 16px; /* Предотвращает автозум на iPhone */
+  }
+
+  /* Горизонтальный скролл для широких таблиц */
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}

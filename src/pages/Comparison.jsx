@@ -62,7 +62,7 @@ export default function Comparison() {
     return (
         <div className="comparison-container">
             <header className="comparison-header">
-                <h1>⚖️ University Comparison Engine</h1>
+                <h1>University Comparison Engine</h1>
                 <p>Сравни два университета лоб в лоб с учётом твоего профиля и специальности</p>
             </header>
 
@@ -92,11 +92,11 @@ export default function Comparison() {
                 </div>
 
                 <button type="submit" className="compare-btn" disabled={loading}>
-                    {loading ? "Analyzing..." : "Compare Now 🚀"}
+                    {loading ? "Analyzing..." : "Compare Now"}
                 </button>
             </form>
 
-            {loading && <div className="status-text">✨ ИИ сравнивает академические программы и шансы...</div>}
+            {loading && <div className="status-text">ИИ сравнивает академические программы и шансы...</div>}
             {errorMsg && <div className="error-text" style={{ color: "#ff4d4d", marginTop: "1rem" }}>{errorMsg}</div>}
 
             {comparisonData && !loading && (
@@ -118,7 +118,7 @@ export default function Comparison() {
                     </div>
 
                     <div className="verdict-box">
-                        <h3>💡 ИИ Вердикт для вашего портфолио</h3>
+                        <h3>ИИ Вердикт для вашего портфолио</h3>
                         <p>{comparisonData.verdict}</p>
                     </div>
                 </div>

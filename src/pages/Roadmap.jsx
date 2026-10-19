@@ -87,14 +87,14 @@ export default function Roadmap() {
     return (
         <div className="roadmap-container">
             <header className="roadmap-header">
-                <h1>🗺️ Personal Admission Roadmap</h1>
+                <h1>Personal Admission Roadmap</h1>
                 <p>Индивидуальный график поступления на специальность <strong>{userProfile?.major || "Selected Major"}</strong></p>
             </header>
 
             {notice && <div className="status-text">⚠️ {notice} Показан стандартный план.</div>}
 
             {loading ? (
-                <div className="status-text">✨ ИИ составляет твой персональный график подготовки...</div>
+                <div className="status-text">ИИ составляет твой персональный график подготовки...</div>
             ) : (
                 <div className="timeline-grid">
                     {roadmap?.phases?.map((phase, pIdx) => (
