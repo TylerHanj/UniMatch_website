@@ -1,5 +1,5 @@
 export function buildUnisUrl({ search = "", country = "" }) {
-    const endpoint = "http://universities.hipolabs.com/search";
+    const endpoint = "https://my-uni-proxy-inky.vercel.app/";
     const url = new URL(endpoint);
 
     const name = search.trim();
