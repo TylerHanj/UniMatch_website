@@ -283,3 +283,54 @@
         border-bottom: 1px solid rgba(197, 168, 128, 0.25);
     }
 }
+
+/* Добавь в конец Comparison.css */
+@media (max-width: 768px) {
+    .comparison-container {
+        padding: 1.5rem 1rem;
+    }
+
+    .comparison-header h1 {
+        font-size: 1.6rem;
+    }
+
+    .compare-form {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1.25rem;
+        gap: 1rem;
+    }
+
+    .vs-badge {
+        align-self: center;
+        margin: 0.2rem 0;
+    }
+
+    .compare-btn {
+        width: 100%;
+    }
+
+    /* Превращаем сетку таблицы в вертикальные карточки */
+    .table-header {
+        display: none; /* Скрываем общий заголовок таблицы */
+    }
+
+    .table-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        padding: 1rem;
+        border-bottom: 1px solid rgba(197, 168, 128, 0.25);
+    }
+
+    .col-criterion {
+        color: #c5a880;
+        font-size: 1.05rem;
+        border-bottom: 1px dashed rgba(197, 168, 128, 0.15);
+        padding-bottom: 0.4rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .col-uni {
+        padding-left: 0.5rem;
+    }
+}

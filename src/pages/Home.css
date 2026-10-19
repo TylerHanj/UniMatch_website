@@ -208,3 +208,46 @@
     color: #8a7a68;
     margin-top: 4px;
 }
+
+/* Добавь в конец Home.css */
+@media (max-width: 900px) {
+    .home-container {
+        padding: 1.25rem 1rem;
+    }
+
+    .portfolio-banner {
+        padding: 1.25rem;
+    }
+
+    .portfolio-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .controls {
+        grid-template-columns: 1fr; /* Фильтры и инпуты встают друг под друга */
+        gap: 0.75rem;
+    }
+
+    .ai-match-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .main-layout {
+        grid-template-columns: 1fr; /* Чат переходит под ленту вузов */
+        gap: 1.5rem;
+    }
+
+    .sidebar-chat {
+        position: static;
+        width: 100%;
+    }
+
+    .card-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}

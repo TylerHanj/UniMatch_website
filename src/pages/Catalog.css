@@ -165,3 +165,57 @@
     color: #a89f91;
     font-size: 0.9rem;
 }
+
+/* ==========================================
+   DARK ACADEMIA THEME — CATALOG PAGE
+   ========================================== */
+
+.catalog-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem;
+    color: #e3dad0;
+    font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+.catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.uni-card {
+    background: #141318;
+    border: 1px solid rgba(197, 168, 128, 0.2);
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.uni-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(197, 168, 128, 0.5);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* ------------------------------------------
+   MOBILE ADAPTATION (Catalog Page)
+   ------------------------------------------ */
+@media (max-width: 768px) {
+    .catalog-container {
+        padding: 1.5rem 1rem;
+    }
+
+    .catalog-grid {
+        grid-template-columns: 1fr; /* Одна карточка ВУЗа на всю ширину экрана */
+        gap: 1rem;
+    }
+
+    .uni-card {
+        padding: 1.25rem;
+    }
+}

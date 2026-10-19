@@ -54,3 +54,38 @@
 .header-nav a:first-child:hover img {
     transform: scale(1.03);
 }
+
+.settings-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    filter: brightness(0.9) sepia(0.2); /* Сохраняет наш винтажный вайб */
+    transition: opacity 0.2s ease;
+}
+
+.settings-icon:hover {
+    opacity: 0.8;
+}
+
+/* Добавь в конец Header.css */
+@media (max-width: 768px) {
+    .header-container {
+        padding: 0.8rem 1rem;
+    }
+
+    .header-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    .header-nav a {
+        font-size: 1.1rem;
+    }
+
+    .settings-icon {
+        width: 24px;
+        height: 24px;
+    }
+}

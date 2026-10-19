@@ -1,0 +1,59 @@
+/* ==========================================
+   DARK ACADEMIA THEME — SETTINGS PAGE
+   ========================================== */
+
+.settings {
+    max-width: 600px;
+    margin: 4rem auto;
+    padding: 2.5rem;
+    background: linear-gradient(145deg, #141318, #0f0e12);
+    border: 1px solid rgba(197, 168, 128, 0.25);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    color: #e3dad0;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.settings h1 {
+    font-size: 1.8rem;
+    color: #f5f0eb;
+    font-weight: 600;
+    margin: 0;
+    border-bottom: 1px solid rgba(197, 168, 128, 0.2);
+    padding-bottom: 0.75rem;
+    width: 100%;
+    letter-spacing: 0.02em;
+}
+
+.settings span {
+    font-size: 1.05rem;
+    color: #a89f91;
+    font-style: italic;
+}
+
+/* Кнопка Sign out в стиле винтажной латунной рамки */
+.sign-out-btn {
+    background: linear-gradient(135deg, #2a2219, #1c1610);
+    border: 1px solid #c5a880;
+    color: #c5a880;
+    padding: 0.75rem 1.5rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.sign-out-btn:hover {
+    background: #c5a880;
+    color: #111014;
+    box-shadow: 0 0 15px rgba(197, 168, 128, 0.35);
+    transform: translateY(-1px);
+}

@@ -146,3 +146,123 @@
     background-color: #c9a86b;
     color: #120e0c;
 }
+
+/* ==========================================
+   DARK ACADEMIA THEME — PROFILE PAGE
+   ========================================== */
+
+.profile-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: linear-gradient(145deg, #141318, #0f0e12);
+    border: 1px solid rgba(197, 168, 128, 0.25);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    color: #e3dad0;
+    font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+.profile-header {
+    border-bottom: 1px solid rgba(197, 168, 128, 0.2);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.profile-header h1 {
+    font-size: 2rem;
+    color: #f5f0eb;
+    margin: 0 0 0.5rem 0;
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* На ПК — 2 колонки */
+    gap: 1.25rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #c5a880;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    background: #0d0c0f;
+    border: 1px solid rgba(197, 168, 128, 0.25);
+    color: #e3dad0;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.25s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #c5a880;
+    box-shadow: 0 0 10px rgba(197, 168, 128, 0.2);
+}
+
+.save-profile-btn {
+    background: linear-gradient(135deg, #2a2219, #1c1610);
+    border: 1px solid #c5a880;
+    color: #c5a880;
+    padding: 0.85rem 2rem;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+    margin-top: 1rem;
+}
+
+.save-profile-btn:hover {
+    background: #c5a880;
+    color: #111014;
+    box-shadow: 0 0 15px rgba(197, 168, 128, 0.3);
+}
+
+/* ------------------------------------------
+   MOBILE ADAPTATION (Profile Page)
+   ------------------------------------------ */
+@media (max-width: 768px) {
+    .profile-container {
+        margin: 1rem;
+        padding: 1.25rem;
+    }
+
+    .profile-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr; /* На смартфонах переводим сетку в 1 колонку */
+        gap: 1rem;
+    }
+
+    .save-profile-btn {
+        width: 100%; /* Кнопка во всю ширину для удобного тапа */
+        text-align: center;
+    }
+}

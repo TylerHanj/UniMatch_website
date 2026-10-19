@@ -7,6 +7,7 @@ import Roadmap from './pages/Roadmap';
 import Comparison from './pages/Comparison';
 import Catalog from './pages/Catalog';
 import Auth from './pages/Auth';
+import Settings from './pages/Settings';
 
 function ProtectedLayout() {
     const { sessionUser, loading } = useProfile();
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
         element: <ProtectedLayout />,
         children: [
             { index: true, element: <Home /> },
+            { path: 'settings', element: <Settings /> },
             { path: 'profile', element: <Profile /> },
             { path: 'roadmap', element: <Roadmap /> },
             { path: 'comparison', element: <Comparison /> },
