@@ -2,7 +2,7 @@ import { GoogleGenAI } from '@google/genai';
 
 export const MODEL = 'gemini-3.6-flash';
 
-const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+const apiKey = import.meta.env.GEMINI_API_KEY;
 const client = apiKey ? new GoogleGenAI({ apiKey }) : null;
 
 const CACHE_PREFIX = 'unimatch_ai_v1_';
