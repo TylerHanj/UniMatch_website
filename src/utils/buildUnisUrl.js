@@ -1,5 +1,5 @@
 export function buildUnisUrl({ search = "", country = "" }) {
-    const endpoint = "https://universities.hipolabs.com/search";
+    const endpoint = "http://universities.hipolabs.com/search";
     const url = new URL(endpoint);
 
     const name = search.trim();
