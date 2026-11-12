@@ -28,9 +28,9 @@ export default function Auth() {
                 if (error) throw error;
 
                 if (data?.user && !data.session) {
-                    setSuccessMsg('✨ Письмо для подтверждения отправлено на почту! Проверьте инбокс.');
+                    setSuccessMsg('Письмо для подтверждения отправлено на почту! Проверьте инбокс.');
                 } else {
-                    setSuccessMsg('🎉 Аккаунт успешно создан!');
+                    setSuccessMsg('Аккаунт успешно создан!');
                     setTimeout(() => navigate('/'), 1500);
                 }
             } else {
@@ -52,7 +52,7 @@ export default function Auth() {
     return (
         <div className="auth-container">
             <div className="auth-card">
-                <h2>{isSignUp ? '🎓 Создать аккаунт UniMatch' : '🗝️ Вход в систему'}</h2>
+                <h2>{isSignUp ? 'Создать аккаунт UniMatch' : 'Вход в систему'}</h2>
                 <p className="auth-subtitle">
                     {isSignUp
                         ? 'Начните путь к университету мечты'

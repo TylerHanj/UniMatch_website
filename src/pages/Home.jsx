@@ -76,7 +76,7 @@ export default function Home() {
         <div className="home-container">
             <div className="portfolio-banner">
                 <div className="portfolio-info">
-                    <span>🎯 Personal Recommendations for: <strong>{userProfile.major || "—"}</strong></span>
+                    <span>Personal Recommendations for: <strong>{userProfile.major || "—"}</strong></span>
                     <span className="portfolio-tags">Target: {userProfile.countries || "—"}</span>
                 </div>
 
@@ -113,14 +113,14 @@ export default function Home() {
             <div className="main-layout">
                 <main className="universities-feed">
                     <div className="feed-header">
-                        <h2>🏛️ Best Fits for Your Portfolio</h2>
+                        <h2>Best Fits for Your Portfolio</h2>
                         <span className="feed-subtitle">
                             Press “Evaluate with AI” to score these universities against your profile. AI estimates are approximate — verify with the university.
                         </span>
                     </div>
 
                     {loading && <div className="status-text">Loading universities...</div>}
-                    {isAnalyzing && <div className="status-text ai-status">✨ AI is analyzing universities for your portfolio...</div>}
+                    {isAnalyzing && <div className="status-text ai-status">AI is analyzing universities for your portfolio...</div>}
                     {error && <div className="status-text" style={{ color: "#ff4d4d" }}>{error}</div>}
                     {!loading && !error && unis.length === 0 && (
                         <div className="status-text">No universities found.</div>
