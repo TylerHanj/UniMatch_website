@@ -1,11 +1,11 @@
-import { GoogleGenAI } from '@google/genai';
+import Groq from "groq-sdk";
 
-export const MODEL = 'gemini-3.6-flash';
+export const MODEL = 'openai/gpt-oss-20b';
 
-const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-const client = apiKey ? new GoogleGenAI({ apiKey }) : null;
+const apiKey = import.meta.env.VITE_GROQ_API_KEY;
+const client = apiKey ? new Groq({ apiKey, dangerouslyAllowBrowser: true }) : null;
 
-const CACHE_PREFIX = 'unimatch_ai_v1_';
+const CACHE_PREFIX = 'unimatch_ai_v2_'; // обновил версию кэша, чтобы старые ответы не мешали
 const inflight = new Map();
 
 export class AiError extends Error {
@@ -45,27 +45,38 @@ export function makeCacheKey(...parts) {
 
 async function callModel(prompt, json) {
     if (!client) {
-        throw new AiError('NO_KEY', 'API-ключ не найден. Проверь .env и перезапусти npm run dev.');
+        throw new AiError('NO_KEY', 'API-ключ Groq не найден. Проверь VITE_GROQ_API_KEY в .env и перезапусти npm run dev.');
     }
-    const response = await client.models.generateContent({
+
+    const messages = json
+        ? [
+            { role: 'system', content: 'You are a helpful assistant. Always respond with valid JSON.' },
+            { role: 'user', content: prompt }
+        ]
+        : [
+            { role: 'user', content: prompt }
+        ];
+
+    const response = await client.chat.completions.create({
         model: MODEL,
-        contents: prompt,
-        config: json ? { responseMimeType: 'application/json' } : undefined,
+        messages,
+        response_format: json ? { type: 'json_object' } : undefined,
     });
-    return response.text ?? '';
+
+    return response.choices[0]?.message?.content ?? '';
 }
 
 function toAiError(err) {
     if (err instanceof AiError) return err;
     const msg = err?.message || '';
-    if (err?.status === 429 || /429|quota|RESOURCE_EXHAUSTED/i.test(msg)) {
+    if (err?.status === 429 || /429|rate_limit|quota/i.test(msg)) {
         return new AiError('RATE_LIMIT', 'Лимит запросов к ИИ исчерпан. Попробуй позже.');
     }
-    if (err?.status === 503 || /503|overloaded|UNAVAILABLE/i.test(msg)) {
+    if (err?.status === 503 || err?.status === 502 || /503|overloaded|unavailable/i.test(msg)) {
         return new AiError('OVERLOADED', 'Сервер ИИ перегружен. Попробуй через минуту.');
     }
-    if (/API key/i.test(msg)) {
-        return new AiError('NO_KEY', 'API-ключ недействителен. Проверь .env.');
+    if (err?.status === 401 || /invalid_api_key|API key/i.test(msg)) {
+        return new AiError('NO_KEY', 'API-ключ Groq недействителен. Проверь .env.');
     }
     return new AiError('UNKNOWN', 'Не удалось получить ответ от ИИ.');
 }

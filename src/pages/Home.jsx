@@ -12,7 +12,11 @@ const MAX_UNIS = 15;
 export default function Home() {
     const [search, setSearch] = useState("");
     const [country, setCountry] = useState("");
+
+    // Храним всю базу университетов по выбранной стране и текущий отфильтрованный/топовый список
+    const [allUnis, setAllUnis] = useState([]);
     const [unis, setUnis] = useState([]);
+
     const [loading, setLoading] = useState(false);
     const [isAnalyzing, setIsAnalyzing] = useState(false);
     const [error, setError] = useState("");
@@ -23,6 +27,7 @@ export default function Home() {
     const profileCountry = userProfile?.countries?.split(",")[0]?.trim();
     const targetCountry = country || profileCountry || "United States";
 
+    // Загрузка всех университетов из API Hipolabs при изменении страны или поискового запроса
     useEffect(() => {
         const controller = new AbortController();
         setLoading(true);
@@ -33,11 +38,17 @@ export default function Home() {
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 return res.json();
             })
-            .then((data) => setUnis(Array.isArray(data) ? data.slice(0, MAX_UNIS) : []))
+            .then((data) => {
+                const fullList = Array.isArray(data) ? data : [];
+                setAllUnis(fullList);
+                // По умолчанию до оценки показываем первые MAX_UNIS вузов
+                setUnis(fullList.slice(0, MAX_UNIS));
+            })
             .catch((err) => {
                 if (err.name === "AbortError") return;
                 console.error(err);
                 setError("Не удалось загрузить список университетов.");
+                setAllUnis([]);
                 setUnis([]);
             })
             .finally(() => {
@@ -48,23 +59,29 @@ export default function Home() {
     }, [debouncedSearch, targetCountry]);
 
     const handleAnalyze = async () => {
-        if (!unis.length || isAnalyzing) return;
-        const snapshot = unis;
+        if (!allUnis.length || isAnalyzing) return;
         setIsAnalyzing(true);
         setError("");
 
         try {
-            const results = await calculateMatch(userProfile, snapshot);
-            const scored = snapshot
+            const candidates = allUnis.length > 200
+                ? allUnis.filter(u => !/theological|bible|cosmetology|seminary|nursing/i.test(u.name)).slice(0, 200)
+                : allUnis;
+
+            const results = await calculateMatch(userProfile, candidates);
+
+            const top15 = candidates
                 .map((uni, index) => {
                     const r = results.find((item) => item.id === index);
                     return r
                         ? { ...uni, matchPercentage: r.matchPercentage, matchReason: r.reason }
-                        : uni;
+                        : null;
                 })
-                .sort((a, b) => (b.matchPercentage ?? -1) - (a.matchPercentage ?? -1));
+                .filter(Boolean)
+                .sort((a, b) => (b.matchPercentage ?? -1) - (a.matchPercentage ?? -1))
+                .slice(0, MAX_UNIS); // Срезаем топ-15 ПОСЛЕ оценки всей базы!
 
-            setUnis((current) => (current === snapshot ? scored : current));
+            setUnis(top15);
         } catch (err) {
             setError(err.message || "Не удалось получить оценку от ИИ.");
         } finally {
